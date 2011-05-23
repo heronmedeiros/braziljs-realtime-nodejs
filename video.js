@@ -13,9 +13,13 @@ var server = http.createServer(function(request, response) {
  var range = request.headers.range;
  console.log(range);
 
+ setInterval(function(){
+      console.log('memory usage: ' + (process.memoryUsage().rss /1024 /1024).toFixed(2) +"MB");
+       }, 5000);
+
   if (range) {
-		inicio = parseInt(range.slice(range.indexOf("bytes=") + 6, range.indexOf("-")));
-		fim = parseInt(range.slice(range.indexOf("-") + 1, range.length));    
+    inicio = parseInt(range.slice(range.indexOf("bytes=") + 6, range.indexOf("-")));
+    fim = parseInt(range.slice(range.indexOf("-") + 1, range.length));    
   }
 
   if (isNaN(fim) || fim == 0) {
